@@ -1,4 +1,6 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Maui.Handlers
 {
@@ -65,6 +67,15 @@ namespace Microsoft.Maui.Handlers
 		public static void MapMaximumDate(DatePickerHandler handler, IDatePicker datePicker)
 		{
 			handler.TypedNativeView?.UpdateMaximumDate(datePicker, handler._dialog);
+		}
+
+		public static void MapFont(DatePickerHandler handler, IDatePicker datePicker)
+		{
+			_ = handler.Services ?? throw new InvalidOperationException($"{nameof(Services)} should have been set by base class.");
+
+			var fontManager = handler.Services.GetRequiredService<IFontManager>();
+
+			handler.TypedNativeView?.UpdateFont(datePicker, fontManager);
 		}
 
 		void ShowPickerDialog()

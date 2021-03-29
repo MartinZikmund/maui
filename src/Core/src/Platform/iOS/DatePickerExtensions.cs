@@ -52,5 +52,11 @@ namespace Microsoft.Maui
 				picker.MaximumDate = datePicker.MaximumDate.ToNSDate();
 			}
 		}
+
+		public static void UpdateFont(this MauiDatePicker nativeDatePicker, IDatePicker datePicker, IFontManager fontManager)
+		{
+			var uiFont = fontManager.GetFont(datePicker.Font);
+			nativeDatePicker.Font = uiFont;
+		}
 	}
 }
